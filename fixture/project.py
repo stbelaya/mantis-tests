@@ -17,9 +17,7 @@ class ProjectHelper:
         self.app.session.change_field_value(locator.description, project.description)
 
     def create(self, project):
-        wd = self.app.wd
         # navigate to Manage Projects page
-        self.app.session.open_manage_page()
         self.app.session.open_manage_project_page()
         # press Create New Project button
         self.app.session.click(locator.create_new_project_button)

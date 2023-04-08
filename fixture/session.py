@@ -35,19 +35,17 @@ class SessionHelper:
     def logout(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, locator.logout).click()
-        # wd.find_element(By.NAME, locator.username)
 
     def open_home_page(self):
         wd = self.app.wd
         wd.get(self.home_page)
 
     def open_manage_page(self):
-        wd = self.app.wd
         if self.is_on_page(self.manage_page) is False:
             self.click(project_locator.manage_link)
 
     def open_manage_project_page(self):
-        wd = self.app.wd
+        self.open_manage_page()
         if self.is_on_page(self.manage_project_page) is False:
             self.click(project_locator.manage_project_link)
 
