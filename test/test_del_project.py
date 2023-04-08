@@ -4,7 +4,6 @@ from model.project import Project
 
 
 def test_delete_some_project(app):
-    app.session.ensure_login("administrator", "root")
     old_projects = app.project.get_project_list()
     if not old_projects:
         app.project.create(name="sw00 name")
