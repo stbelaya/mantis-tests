@@ -36,10 +36,6 @@ class SessionHelper:
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, locator.logout).click()
 
-    def open_home_page(self):
-        wd = self.app.wd
-        wd.get(self.home_page)
-
     def open_manage_page(self):
         if self.is_on_page(self.manage_page) is False:
             self.click(project_locator.manage_link)
@@ -74,3 +70,17 @@ class SessionHelper:
     def is_on_page(self, url):
         wd = self.app.wd
         return wd.current_url.endswith(url)
+
+    def ensure_logout(self):
+        wd = self.app.wd
+        if self.is_logged_in():
+            self.logout()
+
+    def ensure_login(self, username, password):
+        wd = self.app.wd
+        if self.is_logged_in():
+            if self.is_logged_in_as(username):
+                return
+            else:
+                self.logout()
+        self.login(username, password)

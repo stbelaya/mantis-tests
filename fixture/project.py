@@ -31,7 +31,6 @@ class ProjectHelper:
     def get_project_list(self):
         if self.project_cache is None:
             wd = self.app.wd
-            self.app.session.open_manage_page()
             self.app.session.open_manage_project_page()
             self.project_cache = []
             for row in wd.find_elements(By.XPATH, locator.project_row):
@@ -57,3 +56,17 @@ class ProjectHelper:
     def get_first_name(self, project_list):
         names = self.get_project_names(project_list)
         return names[0]
+
+    def delete_project_by_name(self, name):
+        wd = self.app.wd
+        name_cell = f"//a[contains(text(),'{name}')]"
+        self.app.session.open_manage_project_page()
+        # open project with name
+        wd.find_element(By.XPATH, name_cell).click()
+        # press Delete Project button
+        self.app.session.click(locator.delete_project_button)
+        # press confirmation Delete Project button
+        self.app.session.click(locator.delete_project_sure)
+        self.app.session.open_manage_project_page()
+        self.project_cache = None
+

@@ -26,6 +26,13 @@ class ProjectLocators:
 
     # Projects table
     project_row = "//table[3]/*/tr[@class='row-1' or @class='row-2']"
+    name_cell = ()
+
+    # Edit Project form fields
+    delete_project_button = 'input[value="Delete Project"]'
+
+    # confirmation screen
+    delete_project_sure = 'input[value="Delete Project"]'
 
     app_error_duplicate_name = 'td.form-title'
 

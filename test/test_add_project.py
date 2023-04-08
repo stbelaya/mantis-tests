@@ -5,7 +5,7 @@ from fixture.locators import ProjectLocators as locator
 
 
 def test_add_project(app):
-    app.session.login("administrator", "root")
+    app.session.ensure_login("administrator", "root")
     old_projects = app.project.get_project_list()
     project = Project(name="sw00 name", status="stable", view_status="private",
                       description=" sw00 description very good project")
@@ -17,7 +17,7 @@ def test_add_project(app):
 
 
 def test_add_project_duplicate_name(app):
-    app.session.login("administrator", "root")
+    app.session.ensure_login("administrator", "root")
     projects = app.project.get_project_list()
     if not projects:
         project = Project(name="sw00 name", status="stable", view_status="private",
