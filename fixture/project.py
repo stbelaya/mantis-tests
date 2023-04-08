@@ -46,7 +46,14 @@ class ProjectHelper:
                                                   description=description))
         return list(self.project_cache)
 
-    def prepare_project_data(self, project, project_list):
-        names = [p.name for p in project_list]
+    def make_project_name_unique(self, project, project_list):
+        names = self.get_project_names(project_list)
         while project.name in names:
             project.name += "1"
+
+    def get_project_names(self, project_list):
+        return [p.name for p in project_list]
+
+    def get_first_name(self, project_list):
+        names = self.get_project_names(project_list)
+        return names[0]

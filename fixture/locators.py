@@ -26,3 +26,6 @@ class ProjectLocators:
 
     # Projects table
     project_row = "//table[3]/*/tr[@class='row-1' or @class='row-2']"
+
+    app_error_duplicate_name = 'td.form-title'
+
