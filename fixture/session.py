@@ -6,14 +6,15 @@ from fixture.locators import LoginLocators as locator, ProjectLocators as projec
 
 class SessionHelper:
 
-    def __init__(self, app, base_url):
+    def __init__(self, app):
+        self.home_page = None
         self.app = app
-        self.home_page = base_url
         self.manage_project_page = "/mantisbt-1.2.20/manage_proj_page.php"
         self.manage_page = "/mantisbt-1.2.20/manage_overview_page.php"
 
     def login(self, username, password):
         wd = self.app.wd
+        self.home_page = self.app.base_url
         # self.open_home_page()
         self.navigate_to_page(self.home_page)
         self.change_field_value(locator.username, username)
