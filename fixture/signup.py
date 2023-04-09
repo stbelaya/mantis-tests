@@ -16,6 +16,9 @@ class SignupHelper:
         self.app.session.click(locator.signup_button)
 
         mail = self.app.mail.get_mail(username, password, "[MantisBT] Account registration")
+        # TBD: to check this
+        if mail is None:
+            raise FileExistsError
         url = self.extract_confirmation_url(mail)
 
         self.app.session.navigate_to_page(url)
