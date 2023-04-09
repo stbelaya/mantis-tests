@@ -7,8 +7,8 @@ from fixture.locators import LoginLocators as locator, ProjectLocators as projec
 class SessionHelper:
 
     def __init__(self, app):
-        self.home_page = None
         self.app = app
+        self.home_page = None
         self.manage_project_page = "/mantisbt-1.2.20/manage_proj_page.php"
         self.manage_page = "/mantisbt-1.2.20/manage_overview_page.php"
 

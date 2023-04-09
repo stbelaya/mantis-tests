@@ -9,6 +9,15 @@ class LoginLocators:
     logged_user = "td.login-info-left span"
 
 
+class SignupLocators:
+    username = '[name="username"]'
+    email = '[name="email"]'
+    signup_button = 'input[value="Signup"]'
+    password = '[name="password"]'
+    password_confirm = '[name="password_confirm"]'
+    update_user_button = 'input[value="Update User"]'
+
+
 class ProjectLocators:
     manage_link = 'a[href="/mantisbt-1.2.20/manage_overview_page.php"]'
     manage_project_link = 'a[href="/mantisbt-1.2.20/manage_proj_page.php"]'
