@@ -37,7 +37,7 @@ class SoapHelper:
         data = [dict(d) for d in parsed['SOAP-ENV:Envelope']['SOAP-ENV:Body']
         ['ns1:mc_projects_get_user_accessibleResponse']['return']['item']]
         for p in data:
-            project = Project(id=p["id"], name=p["name"], status=p["status"],
-                              view_status=p["view_state"], description="description")
+            project = Project(id=p["id"], name=p["name"], status=p["status"]["name"],
+                              view_status=p["view_state"]["name"], description=p["description"])
             project_list.append(project)
         return project_list

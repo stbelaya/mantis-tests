@@ -27,5 +27,5 @@ class SignupHelper:
         self.app.session.click(locator.update_user_button)
 
     def extract_confirmation_url(self, text):
-        # $ for end of line  < MULTILINE option
+        # $ for end of line  <-- MULTILINE option
         return re.search("http://.*$", text, re.MULTILINE).group(0)
