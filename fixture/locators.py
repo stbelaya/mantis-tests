@@ -33,6 +33,11 @@ class ProjectLocators:
 
     add_project_button = 'input[value="Add Project"]'
 
+    # Project dictionaries
+    status = ["development", "release", "stable", "obsolete"]
+    is_inherit = [True, False]
+    view_status = ["public", "private"]
+
     # Projects table
     project_row = "//table[3]/*/tr[@class='row-1' or @class='row-2']"
     name_cell = ()
