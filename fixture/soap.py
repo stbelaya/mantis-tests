@@ -1,6 +1,9 @@
 from suds.client import Client
 from suds import WebFault
-import json
+import xmltodict
+
+from model.project import Project
+from fixture.locators import SoapLinks as links
 
 
 class SoapHelper:
@@ -9,7 +12,7 @@ class SoapHelper:
         self.app = app
 
     def can_login(self, username, password):
-        client = Client("http://localhost/mantisbt-1.2.20/api/soap/mantisconnect.php?wsdl")
+        client = Client(links.mantisconnect_wdsl)
         try:
             client.service.mc_login(username, password)
             return True
@@ -19,11 +22,22 @@ class SoapHelper:
     def get_project_list(self):
         username = self.app.config["webadmin"]["username"]
         password = self.app.config["webadmin"]["password"]
-        client = Client("http://localhost/mantisbt-1.2.20/api/soap/mantisconnect.php?wsdl")
+        client = Client(links.mantisconnect_wdsl, retxml=True)
         try:
-            project_data = client.service.mc_projects_get_user_accessible(username, password)
-            # TBD: need to parse this json
-            data = json.load(project_data)
-            return data
-        except WebFault:
+            raw_data = client.service.mc_projects_get_user_accessible(username, password)
+            project_list = self.parse_project_list(raw_data)
+            return project_list
+        except WebFault as wf:
+            print(f"Error {wf} during SOAP response receiving is occurred")
             return []
+
+    def parse_project_list(self, raw_data):
+        project_list = []
+        parsed = xmltodict.parse(raw_data, xml_attribs=False)
+        data = [dict(d) for d in parsed['SOAP-ENV:Envelope']['SOAP-ENV:Body']
+        ['ns1:mc_projects_get_user_accessibleResponse']['return']['item']]
+        for p in data:
+            project = Project(id=p["id"], name=p["name"], status=p["status"],
+                              view_status=p["view_state"], description="description")
+            project_list.append(project)
+        return project_list

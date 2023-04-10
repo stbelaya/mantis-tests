@@ -18,7 +18,7 @@ class SignupHelper:
         mail = self.app.mail.get_mail(username, password, "[MantisBT] Account registration")
         # TBD: to check this
         if mail is None:
-            raise FileExistsError
+            raise FileNotFoundError("Registration email with defined subject is not found")
         url = self.extract_confirmation_url(mail)
 
         self.app.session.navigate_to_page(url)

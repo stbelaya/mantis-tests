@@ -45,3 +45,6 @@ class ProjectLocators:
 
     app_error_duplicate_name = 'td.form-title'
 
+
+class SoapLinks:
+    mantisconnect_wdsl = "http://localhost/mantisbt-1.2.20/api/soap/mantisconnect.php?wsdl"
