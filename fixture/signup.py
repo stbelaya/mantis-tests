@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 import re
 
 from fixture.locators import SignupLocators as locator
@@ -16,7 +15,6 @@ class SignupHelper:
         self.app.session.click(locator.signup_button)
 
         mail = self.app.mail.get_mail(username, password, "[MantisBT] Account registration")
-        # TBD: to check this
         if mail is None:
             raise FileNotFoundError("Registration email with defined subject is not found")
         url = self.extract_confirmation_url(mail)
